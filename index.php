@@ -1,7 +1,7 @@
 <?php
 $title = "Accueil"; // title for current page
 include("partials/header.php");
-
+require_once("helpers/pdo.php")
 ?>
 <!-- main content -->
 <div class="pt-16 wrap__content">
