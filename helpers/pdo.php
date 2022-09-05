@@ -3,7 +3,7 @@
 $serveur = "localhost";
 $dbname = "app_game";
 $login = "root";
-$password = "root"; // or ""
+$password = ""; // or ""
 
 try {
   $pdo = new PDO("mysql:host=$serveur;dbname=$dbname", $login, $password, array(

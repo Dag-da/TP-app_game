@@ -8,39 +8,24 @@ include("helpers/functions.php"); // include function
 // inclure PDO pour la connexion a la BDD dans mon script
 require_once("helpers/pdo.php");
 
-//1-  Query to get all games
-$sql = "SELECT * FROM jeux";
-//2- Prépare la query (preformatter)
-$query = $pdo->prepare($sql);
-//3 - Execute ma requette
-$query->execute();
-//4 - stock my query in variable
-$games = $query->fetchAll();
-// debug_array($games)
+require_once("sql/selectAll_game_sql.php")
 ?>
 <!-- main-content -->
 <div class="pt-16 wrap__content">
   <!-- head content -->
   <div class="wrap__content-head text-center">
-    <h1 class="text-blue-500 text-5xl uppercase font-black">App game</h1>
-    <p>L'app qui repertorie vos jeux</p>
-
-    <?php
-    // je verifie que session error ou succes est vide ou pas
-    if ($_SESSION["error"]) { ?>
-      <div class="bg-red-400 text-white py-6">
-        <?= $_SESSION["error"] ?>;
-      </div>
-    <?php } elseif ($_SESSION["success"]) { ?>
-      <div class="bg-green-400 text-white py-6">
-        <?= $_SESSION["success"] ?>;
-      </div>
-    <?php }
-    // je vide ma variable $_SESSION["error"] pour qu'il n'affiche pas de message en creant un array vide
-    $_SESSION["error"] = [];
-    $_SESSION["success"] = [];
+    <?php 
+    $main_title = "App Game";
+    include('partials/_h1.php') 
     ?>
-
+    <p>L'app qui repertorie vos jeux</p>
+    <!-- button for add game -->
+    <div class="pt-4">
+      <a href="add_game.php" class="btn btn-primary">Add Game</a>
+    </div>
+    <?php
+    require_once("partials/_alert.php");
+    ?>
   </div>
   <!-- table -->
   <div class="overflow-x-auto mt-16">
@@ -55,25 +40,30 @@ $games = $query->fetchAll();
           <th>Prix</th>
           <th>PEGI</th>
           <th>Voir</th>
+          <th>Supprimer</th>
         </tr>
       </thead>
       <tbody>
         <?php
         if (count($games) == 0) {
           echo "<tr><td class=text-center>Pas de jeux disponible actuellement</td></tr>";
-        } else { ?>
-          <?php foreach ($games as $game) : ?>
-            <tr>
-              <th><?= $game['id'] ?></th>
-              <td><?= $game['name'] ?></td>
+        } else { 
+          $game_id = 0;
+          foreach ($games as $game) : ?>
+            <tr class="hover:text-blue-500">
+              <th><?= ++$game_id ?></th>
+              <td><a href="show.php?id=<?= $game['id'] ?>&name=<?= $game['name'] ?>"><?= $game['name'] ?></a></td>
               <td><?= $game['genre'] ?></td>
-              <td><?= $game['plateforms'] ?></td>
+              <td><?= $game['plateform'] ?></td>
               <td><?= $game['price'] ?></td>
-              <td><?= $game['PEGI'] ?></td>
+              <td><?= $game['pegi'] ?></td>
               <td>
                 <a href="show.php?id=<?= $game['id'] ?>&name=<?= $game['name'] ?>">
                   <img src="img/loupe.png" alt="loupe" class="w-4">
                 </a>
+              </td>
+              <td>
+                <?php include("partials/_modal.php") ?>
               </td>
             </tr>
           <?php endforeach ?>
