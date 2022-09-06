@@ -1,7 +1,7 @@
 <div class="pt-16">
   <?php
   $main_title = $game["name"];
-  include("partials/_h1.php");
+  include("_h1.php");
   ?>
   <div class="f">
     <p class="pt-4"><?= $game["description"] ?></p>
@@ -12,6 +12,6 @@
       <div class="pt-4">
     </div>
     <a href="update.php?id=<?= $game["id"] ?>&name=<?= $game["name"] ?>" class="btn btn-success text-white">Modifier le jeux</a>
-    <?php include("partials/_modal.php") ?>
+    <?php include("_modal.php") ?>
   </div>
 </div>

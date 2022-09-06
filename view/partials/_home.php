@@ -3,15 +3,15 @@
     <div class="wrap__content-head text-center">
         <?php
         $main_title = "App Game";
-        include('partials/_h1.php')
+        include('_h1.php')
         ?>
         <p>L'app qui repertorie vos jeux</p>
         <!-- button for add game -->
         <div class="pt-4">
-            <a href="add_game.php" class="btn btn-primary">Add Game</a>
+            <a href="create.php" class="btn btn-primary">Add Game</a>
         </div>
         <?php
-        require_once("partials/_alert.php");
+        require_once("_alert.php");
         ?>
     </div>
     <!-- table -->
@@ -50,7 +50,7 @@
                                 </a>
                             </td>
                             <td>
-                                <?php include("partials/_modal.php") ?>
+                                <?php include("_modal.php") ?>
                             </td>
                         </tr>
                     <?php endforeach ?>

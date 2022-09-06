@@ -20,7 +20,8 @@
     $tableau_propre_de_plateforms[] = clear_xss($linge_sale);
   };
   $pegi = !empty($_POST["pegi"]) ? clear_xss($_POST["pegi"]) : [];
-  // $url_img = $img_upload_path;
-  debug_array($_FILES);
-  $files = clear_xss_multiarr($_FILES);
-  debug_array($files);
+  if (!empty($img_upload_path)) {
+    $url_img = $img_upload_path;
+  } else {
+    $error['url_img'] = "<span class='text-red-500'>*Veuillez choisir un fichier</span>";
+  }
